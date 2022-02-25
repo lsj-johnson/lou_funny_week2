@@ -18,34 +18,29 @@ RSpec.describe OpenMic do
     expect(@open_mic.performers).to eq([])
   end
 
-  it 'can invite performers' do
-    @open_mic.welcome(@user_1)
-    @open_mic.welcome(@user_2)
+  describe 'added performers to event' do
+    before  :each do
+      @open_mic.welcome(@user_1)
+      @open_mic.welcome(@user_2)
+    end
 
-    expect(@open_mic.performers).to eq([@user_1, @user_2])
-  end
+    it 'can invite performers' do
+      expect(@open_mic.performers).to eq([@user_1, @user_2])
+    end
 
-  it 'can tell if same joke is used multiple times' do
-    # @open_mic.performers[1].learn(@joke_1)
-    # @open_mic.performers[1].learn(@joke_2)
-    @open_mic.welcome(@user_1)
-    @open_mic.welcome(@user_2)
-    @user_2.learn(@joke_1)
-    @user_2.learn(@joke_2)
+    it 'can tell if same joke is used multiple times' do
+      @user_2.learn(@joke_1)
+      @user_2.learn(@joke_2)
 
-    expect(@open_mic.repeated_jokes?).to eq(false)
-  end
+      expect(@open_mic.repeated_jokes?).to eq(false)
+    end
 
-  it 'can tell if same joke is used multiple times 2' do
-    # @open_mic.performers[1].learn(@joke_1)
-    # @open_mic.performers[1].learn(@joke_2)
-    # @open_mic.performers[0].learn(@joke_1)
-    @open_mic.welcome(@user_1)
-    @open_mic.welcome(@user_2)
-    @user_2.learn(@joke_1)
-    @user_2.learn(@joke_2)
-    @user_1.learn(@joke_1)
+    it 'can tell if same joke is used multiple times 2' do
+      @user_2.learn(@joke_1)
+      @user_2.learn(@joke_2)
+      @user_1.learn(@joke_1)
 
-    expect(@open_mic.repeated_jokes?).to eq(true)
+      expect(@open_mic.repeated_jokes?).to eq(true)
+    end
   end
 end
