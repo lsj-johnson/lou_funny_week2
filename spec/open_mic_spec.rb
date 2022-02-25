@@ -15,4 +15,11 @@ RSpec.describe OpenMic do
     expect(@open_mic.date).to eq('11-20-18')
     expect(@open_mic.performers).to eq([])
   end
+
+  it 'can invite performers' do
+    @open_mic.welcome(@user_1)
+    @open_mic.welcome(@user_2)
+
+    expect(@open_mic.performers).to eq([@user_1, @user_2])
+  end
 end

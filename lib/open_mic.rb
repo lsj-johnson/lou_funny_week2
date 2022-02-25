@@ -14,4 +14,8 @@ class OpenMic
   def date
     @event_hash[:date]
   end
+
+  def welcome(performer)
+    @performers.append(performer)
+  end
 end
