@@ -18,19 +18,34 @@ class OpenMic
 
   def welcome(performer)
     @performers.append(performer)
-    performer.jokes.each do |joke|
-      @joke_ids_all.append(joke.id)
-    end
+    # performer.jokes.each do |joke|
+    #   @joke_ids_all.append(joke.id)
+    # end
   end
 
   def repeated_jokes?
-    unique_jokes = @joke_ids_all.uniq
-    if @joke_ids_all.length > unique_jokes.length
-      return true
-    else
-      return false
+    joke_ids_all = []
+    @performers.each do |performer|
+      performer.jokes.each do |joke|
+        joke_ids_all.append(joke.id)
+      end
     end
+    unique_jokes = joke_ids_all.uniq
+    repeat = false
+    if joke_ids_all.length > unique_jokes.length
+      repeat = true
+    end
+    repeat
   end
+
+  # def repeated_jokes?
+  #   unique_jokes = @joke_ids_all.uniq
+  #   if @joke_ids_all.length > unique_jokes.length
+  #     return true
+  #   else
+  #     return false
+  #   end
+  # end
 
   # def repeated_jokes?
   #   # create array of all jokes

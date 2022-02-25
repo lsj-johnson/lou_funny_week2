@@ -26,6 +26,10 @@ RSpec.describe OpenMic do
   end
 
   it 'can tell if same joke is used multiple times' do
+    # @open_mic.performers[1].learn(@joke_1)
+    # @open_mic.performers[1].learn(@joke_2)
+    @open_mic.welcome(@user_1)
+    @open_mic.welcome(@user_2)
     @user_2.learn(@joke_1)
     @user_2.learn(@joke_2)
 
@@ -33,6 +37,13 @@ RSpec.describe OpenMic do
   end
 
   it 'can tell if same joke is used multiple times 2' do
+    # @open_mic.performers[1].learn(@joke_1)
+    # @open_mic.performers[1].learn(@joke_2)
+    # @open_mic.performers[0].learn(@joke_1)
+    @open_mic.welcome(@user_1)
+    @open_mic.welcome(@user_2)
+    @user_2.learn(@joke_1)
+    @user_2.learn(@joke_2)
     @user_1.learn(@joke_1)
 
     expect(@open_mic.repeated_jokes?).to eq(true)
